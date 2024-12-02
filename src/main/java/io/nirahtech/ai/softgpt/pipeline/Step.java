@@ -94,14 +94,14 @@ public final class Step {
             
             try {
                 do {
-                    StringBuilder sb = new StringBuilder();
+                    StringBuilder stringBuilder = new StringBuilder();
                     if (Objects.isNull(correctionOrder)) {
-                        sb.append(promptSentence);
+                        stringBuilder.append(promptSentence);
                     } else {
-                        sb.append(correctionOrder).append(" ").append(promptSentence);
+                        stringBuilder.append(correctionOrder).append(" ").append(promptSentence);
                     }
     
-                    byte[] inputPrompt = sb.toString().getBytes();
+                    byte[] inputPrompt = stringBuilder.toString().getBytes();
     
                     // Demander au BusinessExpert d'exécuter le prompt
                     byte[] output = this.businessExpert.listenAndRespond(inputPrompt);

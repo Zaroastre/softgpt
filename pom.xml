@@ -12,19 +12,21 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
-
-    <repository>
-  <id>reposilite-repository-snapshots</id>
-  <name>Nirah-Technology Maven Repository</name>
-  <url>https://maven.nirah-technology.fr/snapshots</url>
-</repository>
+    <repositories>
+      <repository>
+        <id>reposilite-repository-snapshots</id>
+        <name>Nirah-Technology Maven Repository</name>
+        <url>https://maven.nirah-technology.fr/snapshots</url>
+      </repository>
+      
+    </repositories>
 
     <dependencies>
-    <dependency>
-  <groupId>io.nirahtech.libraries</groupId>
-  <artifactId>state-machine</artifactId>
-  <version>1.0</version>
-</dependency>
+      <dependency>
+        <groupId>io.nirahtech.libraries</groupId>
+        <artifactId>state-machine</artifactId>
+        <version>1.0</version>
+      </dependency>
     </dependencies>
 
 </project>
