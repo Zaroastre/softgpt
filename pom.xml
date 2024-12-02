@@ -27,6 +27,13 @@
         <artifactId>state-machine</artifactId>
         <version>1.0</version>
       </dependency>
+
+
+      <dependency>
+          <groupId>io.github.ollama4j</groupId>
+          <artifactId>ollama4j</artifactId>
+          <version>1.0.89</version>
+      </dependency>
     </dependencies>
 
 </project>

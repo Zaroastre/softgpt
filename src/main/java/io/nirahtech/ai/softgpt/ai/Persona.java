@@ -12,5 +12,8 @@ public record Persona(
     Collection<String> behavior,
     Collection<String> instructions
 ) {
-    
+    @Override
+    public final String toString() {
+        return "";
+    }   
 }

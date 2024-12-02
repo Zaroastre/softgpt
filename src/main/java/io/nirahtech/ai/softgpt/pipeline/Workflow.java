@@ -8,6 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
+import io.nirahtech.ai.softgpt.ai.Persona;
+
 public class Workflow implements Runnable {
     private final Set<Step> steps;
     private StepState state;
@@ -16,6 +18,13 @@ public class Workflow implements Runnable {
     public Workflow() {
         this.steps = new LinkedHashSet<>();
         this.currentStep = new AtomicReference<>();
+    }
+
+    public void initialize() throws IOException {
+        for (Step step : steps) {
+            final Persona persona = step.getBusinessExpert().agent().persona();
+            step.getBusinessExpert().agent().model().initialize(persona);
+        }
     }
 
     public void addStep(final Step step) {
