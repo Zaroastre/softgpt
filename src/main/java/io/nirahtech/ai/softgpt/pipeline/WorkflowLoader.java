@@ -1,19 +1,18 @@
 package io.nirahtech.ai.softgpt.pipeline;
 
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
-
-import io.nirahtech.ai.softgpt.pipeline.Workflow;
 
 public final class WorkflowLoader {
     private WorkflowLoader() { }
 
-    public static final Workflow load(final File workflowFile) {
+    public static final Workflow load(final File workflowFile) throws IOException {
         return load(new FileInputStream(workflowFile));
     }
     
     public static final Workflow load(final InputStream workflowInputStream) {
-        final BufferedReader 
+        return null;
     }
 }

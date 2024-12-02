@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 import io.nirahtech.ai.softgpt.ai.BusinessExpert;
+import io.nirahtech.ai.softgpt.ai.Sentence;
 
 public final class Step {
     private final UUID id;
@@ -87,7 +88,7 @@ public final class Step {
     public void run() throws IOException {
         final int maxCorrection = 5;
     
-        for (String promptSentence : this.businessExpert.agent().promtpSentences()) {
+        for (Sentence sentence : this.businessExpert.agent().sentences()) {
             int currentCorrection = 0;
             boolean isValid = false;
             String correctionOrder = null;
@@ -96,9 +97,9 @@ public final class Step {
                 do {
                     StringBuilder stringBuilder = new StringBuilder();
                     if (Objects.isNull(correctionOrder)) {
-                        stringBuilder.append(promptSentence);
+                        stringBuilder.append(sentence.text());
                     } else {
-                        stringBuilder.append(correctionOrder).append(" ").append(promptSentence);
+                        stringBuilder.append(correctionOrder).append(" ").append(sentence.text());
                     }
     
                     byte[] inputPrompt = stringBuilder.toString().getBytes();
