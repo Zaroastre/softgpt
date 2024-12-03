@@ -2,8 +2,8 @@ workflow:
   steps:
     - name: "Responsable Produit"
       description: "Gère la vision d'un produit et veille à ce que l'équipe le développe selon les besoins des utilisateurs."
-      model: "llama-3.2-1B"
-      personnaFile: "resources/product-owner-persona.md"
+      model: "llama3.2:1b"
+      personaFile: "resources/product-owner-persona.md"
       sentences:
         - text: "Génère un document en Markdown qui décrit l'architecture du système en tenant compte des besoins utilisateurs suivants : [insérer besoins]."
           validationRequired: true
@@ -57,8 +57,8 @@ workflow:
 
     - name: "Architecte Produit"
       description: "Conçoit des plans pour construire des systèmes informatiques solides et adaptés aux besoins de l'entreprise."
-      model: "llama-3.2-1B"
-      personnaFile: "resources/architect-persona.md"
+      model: "llama3.2:1b"
+      personaFile: "resources/architect-persona.md"
       sentences:
         - text: "Rédige la charte graphique du produit, en spécifiant les couleurs, typographies, éléments visuels et comportements interactifs à adopter pour l'interface utilisateur. Ce document doit être clair et adapté aux exigences de l'expérience utilisateur et aux contraintes techniques."
           validationRequired: true
@@ -126,8 +126,8 @@ workflow:
 
     - name: "UI/UX Designer"
       description: "Crée des interfaces et des visuels qui rendent les applications et sites web agréables et faciles à utiliser."
-      model: "llama-3.2-1B"
-      personnaFile: "resources/designer-persona.md"
+      model: "llama3.2:1b"
+      personaFile: "resources/designer-persona.md"
       sentences:
         - text: "Conçois les maquettes des interfaces utilisateurs pour la plateforme."
           validationRequired: false
@@ -137,8 +137,8 @@ workflow:
 
     - name: "Programmeur"
       description: "Écrit le code informatique qui permet aux logiciels de fonctionner correctement."
-      model: "llama-3.2-1B"
-      personnaFile: "resources/programmer-persona.md"
+      model: "llama3.2:1b"
+      personaFile: "resources/programmer-persona.md"
       sentences:
         - text: "Développe le code des fonctionnalités de la plateforme selon les spécifications et les maquettes."
           validationRequired: false
@@ -149,8 +149,8 @@ workflow:
 
     - name: "QA"
       description: "Teste les logiciels pour s'assurer qu'ils sont de bonne qualité et ne comportent pas de bugs."
-      model: "llama-3.2-1B"
-      personnaFile: "resources/qa-persona.md"
+      model: "llama3.2:1b"
+      personaFile: "resources/qa-persona.md"
       sentences:
         - text: "Teste les fonctionnalités et identifie les bugs ou incohérences."
           validationRequired: false
@@ -160,8 +160,8 @@ workflow:
 
     - name: "DevSecOps"
       description: "S'assure que les systèmes informatiques sont non seulement efficaces, mais aussi sécurisés contre les attaques."
-      model: "llama-3.2-1B"
-      personnaFile: "resources/devsecops-persona.md"
+      model: "llama3.2:1b"
+      personaFile: "resources/devsecops-persona.md"
       sentences:
         - text: "Assure la sécurité du code et déploie l'infrastructure dans un environnement sécurisé."
           validationRequired: false
@@ -171,8 +171,8 @@ workflow:
 
     - name: "Documentaliste"
       description: "Crée et organise des documents clairs pour expliquer les projets, les processus ou les produits d'une entreprise."
-      model: "llama-3.2-1B"
-      personnaFile: "resources/document-persona.md"
+      model: "llama3.2:1b"
+      personaFile: "resources/document-persona.md"
       sentences:
         - text: "Rédige la documentation finale sur les spécifications techniques et le fonctionnement du système."
           validationRequired: false
@@ -182,8 +182,8 @@ workflow:
 
     - name: "Support Technique"
       description: "Aide les utilisateurs en cas de problèmes avec les produits ou services, afin de garantir une bonne expérience."
-      model: "llama-3.2-1B"
-      personnaFile: "resources/support-persona.md"
+      model: "llama3.2:1b"
+      personaFile: "resources/support-persona.md"
       sentences:
         - text: "Fournis un guide de dépannage pour les utilisateurs en fonction de la documentation générée."
           validationRequired: false
@@ -193,8 +193,8 @@ workflow:
 
     - name: "Product Marketing"
       description: "Présente et promeut des produits pour qu'ils trouvent leur public et rencontrent le succès commercial."
-      model: "llama-3.2-1B"
-      personnaFile: "resources/product-marketing-persona.md"
+      model: "llama3.2:1b"
+      personaFile: "resources/product-marketing-persona.md"
       sentences:
         - text: "Crée une campagne marketing pour le produit en utilisant les spécifications et les retours des utilisateurs."
           validationRequired: false
@@ -204,8 +204,8 @@ workflow:
 
     - name: "Data Analyst"
       description: "Analyse les données pour en tirer des informations utiles qui aident l'entreprise à prendre de bonnes décisions."
-      model: "llama-3.2-1B"
-      personnaFile: "resources/data-analyst-persona.md"
+      model: "llama3.2:1b"
+      personaFile: "resources/data-analyst-persona.md"
       sentences:
         - text: "Analyse les résultats des campagnes marketing et les retours des utilisateurs pour ajuster la stratégie produit."
           validationRequired: false

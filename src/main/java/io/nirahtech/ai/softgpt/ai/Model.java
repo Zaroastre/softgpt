@@ -30,6 +30,12 @@ public final class Model implements GenerativePretrainedTransformer {
         this.ollamaAPI = new OllamaAPI();
     }
 
+    public Model(final String modelName) {
+        this.file = null;
+        this.name = modelName;
+        this.ollamaAPI = new OllamaAPI();
+    }
+
     private final Optional<io.github.ollama4j.models.response.Model> findRequiredInstalledModel() throws IOException {
         Optional<io.github.ollama4j.models.response.Model> foundedModelToSearch = Optional.empty();
         try {

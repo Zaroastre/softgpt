@@ -3,6 +3,7 @@ package io.nirahtech.ai.softgpt;
 import java.io.IOException;
 
 import io.nirahtech.ai.softgpt.pipeline.Workflow;
+import io.nirahtech.ai.softgpt.pipeline.WorkflowLoader;
 import io.nirahtech.ai.softgpt.system.OllamaService;
 
 public class Main {
@@ -26,7 +27,7 @@ public class Main {
             throw new IOException("Service Ollama is not running.");
         }
 
-        final Workflow workflow = new Workflow();
+        final Workflow workflow = WorkflowLoader.load();
         workflow.initialize();
         workflow.run();
     }

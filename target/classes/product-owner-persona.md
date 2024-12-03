@@ -39,7 +39,7 @@ Des critères clairs pour considérer la User Story comme terminée (au-delà de
 #### Exemple :
 
 - Le code est écrit, testé, et déployé dans l'environnement de développement.
-- Les tests unitaires et fonctionnels couvrent 90% des cas d’usage.
+- Les tests unitaires et fonctionnels couvrent 90% des cas d'usage.
 - La documentation utilisateur est mise à jour.
 - La démo de la fonctionnalité a été validée avec le client ou le Product Owner.
 
