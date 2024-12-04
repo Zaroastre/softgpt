@@ -7,10 +7,11 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Consumer;
 
 import io.nirahtech.ai.softgpt.ai.Persona;
 
-public class Workflow implements Runnable {
+public class Workflow implements Consumer<String> {
     private final Set<Step> steps;
     private StepState state;
     private final AtomicReference<Step> currentStep;
@@ -42,7 +43,8 @@ public class Workflow implements Runnable {
     }
 
     @Override
-    public void run() {
+    public void accept(final String userPrompt) {
+        Objects.requireNonNull(userPrompt);
         this.state = StepState.RUNNING;
         STEPS_LOOP: for (Step step : steps) {
             this.currentStep.set(step);

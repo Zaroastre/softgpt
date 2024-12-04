@@ -111,7 +111,7 @@ public final class Step {
                     isValid = validateWithParent(output);
     
                     if (!isValid) {
-                        System.err.printf("Étape '%s' (ordre %d) échouée : le parent '%s' n'a pas validé le résultat.%n", this.name, this.order, this.approvationStep.name);
+                        System.err.printf("Step '%s' (ordre %d) failed : parent agent '%s' does not valdate the result.%n", this.name, this.order, this.approvationStep.name);
                         currentCorrection++;
                         
                         // Ajout du message de régénération en cas d'échec
