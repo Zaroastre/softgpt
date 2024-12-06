@@ -19,6 +19,7 @@ public final class StepSprite {
     private final int stepRadius;
     private final Point centerPosition;
     private final int fontSize;
+    private final String fontName;
 
     private final BufferedImage image;
 
@@ -33,6 +34,7 @@ public final class StepSprite {
         this.fontSize = 14;
         this.centerPosition = new Point();
         this.image = new BufferedImage((this.stepRadius*2)+1, (this.stepRadius*2)+1, BufferedImage.TYPE_INT_ARGB);
+        this.fontName = "Arial";
     }
 
     public void setCenter(final Point centerPoint) {
@@ -57,22 +59,18 @@ public final class StepSprite {
         return this.stepRadius*2;
     }
 
-    private final Point computeCenter() {
-        final int x = 0;
-        final int y = 0;
-        return new Point(x, y);
-    }
-
     public void paintComponent(final Graphics graphics) {
         final Graphics2D graphics2d = (Graphics2D) graphics; 
         final Graphics2D texture = this.image.createGraphics();
         texture.setColor(this.colorByStep.get(this.step.getStepState()));
         texture.fillOval(0, 0, this.computeDiameter(), this.computeDiameter());
         texture.dispose();
-        graphics2d.setColor(Color.WHITE);
-        graphics2d.setFont(new Font("Arial", 0, this.fontSize));
-        graphics2d.drawString(this.step.getName(), this.centerPosition.x + this.stepRadius, this.centerPosition.y + (this.stepRadius*2) + (this.fontSize));
-        graphics.drawImage(this.image, this.centerPosition.x, this.centerPosition.y, null);
 
+        graphics2d.setColor(Color.WHITE);
+        graphics2d.setFont(new Font(this.fontName, 0, this.fontSize));
+        graphics2d.drawString(this.step.getName(), this.centerPosition.x - this.stepRadius, this.centerPosition.y + (this.stepRadius*2) + (this.fontSize));
+        
+        graphics.drawImage(this.image, (this.centerPosition.x-this.stepRadius), (this.centerPosition.y-this.stepRadius), null);
+        
     }
 }

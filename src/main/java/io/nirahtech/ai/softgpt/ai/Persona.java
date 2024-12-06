@@ -6,12 +6,12 @@ import java.nio.file.Files;
 import java.util.Collection;
 
 public record Persona(
-    String job,
+    Job job,
     String role,
     String context,
     Collection<String> goals,
     Collection<String> skills,
-    Collection<String> deliverables,
+    Collection<Document> deliverables,
     Collection<String> behavior,
     Collection<String> instructions,
     String rowData

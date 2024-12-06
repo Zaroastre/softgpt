@@ -15,10 +15,18 @@ public class Workflow implements Consumer<String> {
     private final Set<Step> steps;
     private StepState state;
     private final AtomicReference<Step> currentStep;
+    private Consumer<Step> onCurrentStepChangedEventListener;
 
     public Workflow() {
         this.steps = new LinkedHashSet<>();
         this.currentStep = new AtomicReference<>();
+    }
+
+    /**
+     * @param onCurrentStepChangedEventListener the onCurrentStepChangedEventListener to set
+     */
+    public void setOnCurrentStepChangedEventListener(Consumer<Step> onCurrentStepChangedEventListener) {
+        this.onCurrentStepChangedEventListener = onCurrentStepChangedEventListener;
     }
 
     public void initialize() throws IOException {
@@ -48,6 +56,9 @@ public class Workflow implements Consumer<String> {
         this.state = StepState.RUNNING;
         STEPS_LOOP: for (Step step : steps) {
             this.currentStep.set(step);
+            if (Objects.nonNull(this.onCurrentStepChangedEventListener)) {
+                this.onCurrentStepChangedEventListener.accept(this.currentStep.get());
+            }
             try {
                 step.run();
             } catch (IOException e) {

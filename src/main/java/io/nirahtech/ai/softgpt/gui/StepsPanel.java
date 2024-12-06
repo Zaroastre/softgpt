@@ -1,6 +1,7 @@
 package io.nirahtech.ai.softgpt.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.LinkedHashSet;
@@ -32,6 +33,10 @@ public class StepsPanel extends JPanel {
             this.stepSprites.add(stepSprite);
             stepSprite.setCenter(new Point(margin, 0));
             margin += padding;
+            step.addOnStateChangedEventListener(() -> {
+                repaint();
+                revalidate();
+            });
         }
         this.backgroundColor = this.getBackground();
     }
@@ -40,7 +45,11 @@ public class StepsPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (!this.isAlreadyCalled) {
-            this.setCen
+            final Dimension size = this.getSize();
+            this.stepSprites.forEach(sprite -> {
+                final Point position = new Point(sprite.getCenterPosition().x, size.height/2);
+                sprite.setCenter(position);
+            });
         }
         StepSprite previous = null;
         for (StepSprite sprite : this.stepSprites) {

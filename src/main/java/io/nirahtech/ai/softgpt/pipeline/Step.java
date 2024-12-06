@@ -1,6 +1,8 @@
 package io.nirahtech.ai.softgpt.pipeline;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -14,6 +16,7 @@ public final class Step {
     private final int order;
     private final BusinessExpert businessExpert;
     private final Step approvationStep;
+    private final Collection<Runnable> onStateChangedEventListeners;
     private StepState stepState;
 
     public Step(
@@ -31,6 +34,16 @@ public final class Step {
         this.businessExpert = businessExpert;
         this.approvationStep = approvationStep;
         this.stepState = StepState.PENDING;
+        this.onStateChangedEventListeners = new LinkedHashSet<>();
+    }
+
+    /**
+     * @param onStateChangedEventListener the onStateChangedEventListener to set
+     */
+    public void addOnStateChangedEventListener(Runnable onStateChangedEventListener) {
+        if (Objects.nonNull(onStateChangedEventListener)) {
+            this.onStateChangedEventListeners.add(onStateChangedEventListener);
+        }
     }
     
     public UUID getId() {
@@ -84,6 +97,11 @@ public final class Step {
         return true; // Pas de parent = validation automatique
     }
 
+    private final void triggeOnStateChangedEventListerners() {
+        this.onStateChangedEventListeners.forEach(eventListener -> {
+            eventListener.run();
+        });
+    }
 
     public void run() throws IOException {
         final int maxCorrection = 5;
@@ -92,7 +110,7 @@ public final class Step {
             int currentCorrection = 0;
             boolean isValid = false;
             String correctionOrder = null;
-            
+
             try {
                 do {
                     StringBuilder stringBuilder = new StringBuilder();
@@ -129,11 +147,17 @@ public final class Step {
     
                 if (isValid) {
                     System.out.printf("Étape '%s' (ordre %d) validée avec succès.%n", this.name, this.order);
+                    this.stepState = StepState.SUCCESS;
+                    this.triggeOnStateChangedEventListerners();
                 } else {
+                    this.stepState = StepState.FAILED;
+                    this.triggeOnStateChangedEventListerners();
                     System.err.printf("Étape '%s' (ordre %d) échouée : le parent '%s' n'a pas validé le résultat.%n", this.name, this.order, this.approvationStep.name);
                 }
     
             } catch (IOException e) {
+                this.stepState = StepState.FAILED;
+                this.triggeOnStateChangedEventListerners();
                 System.err.printf("Erreur lors de l'exécution de l'étape '%s' (ordre %d) : %s%n", this.name, this.order, e.getMessage());
                 throw e;
             }
