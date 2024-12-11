@@ -8,10 +8,14 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
+import java.util.logging.Logger;
 
 import io.nirahtech.ai.softgpt.ai.Persona;
 
 public class Workflow implements Consumer<String> {
+
+    private static final Logger LOGGER = Logger.getLogger(Workflow.class.getSimpleName());
+
     private final Set<Step> steps;
     private StepState state;
     private final AtomicReference<Step> currentStep;
@@ -30,10 +34,15 @@ public class Workflow implements Consumer<String> {
     }
 
     public void initialize() throws IOException {
+        LOGGER.info("Initializing all steps from the workflow...");
         for (Step step : steps) {
+            LOGGER.info(String.format("Loading persona %s from the step %s...", step.getName(), step.getBusinessExpert().agent().persona().job()));
             final Persona persona = step.getBusinessExpert().agent().persona();
+            LOGGER.info("Initializing the agent model using the persona...");
             step.getBusinessExpert().agent().model().initialize(persona);
+            LOGGER.info("Step initialized with persona.");
         }
+        LOGGER.info("All steps was initialized.");
     }
 
     public void addStep(final Step step) {

@@ -1,0 +1,15 @@
+As a {{ job }}, you must evaluate whether the result meets the expectations defined in test requirements.
+
+If the result is compliant, you must only respond by giving an answer in this JSON format:
+```json
+{"isApproved": true, "details": null}
+```
+
+If the result does not meet your requirements, you must only respond by giving an answer in this JSON format:
+```json
+{"isApproved": false, "details": "A clear and precise message which explains why the produced result is not compliant"}
+```
+
+Here is the result you need to evaluate: 
+
+"{{output}}"

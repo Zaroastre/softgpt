@@ -5,11 +5,15 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 import io.nirahtech.ai.softgpt.ai.BusinessExpert;
 import io.nirahtech.ai.softgpt.ai.Sentence;
 
 public final class Step {
+
+    private static final Logger LOGGER = Logger.getLogger(Step.class.getSimpleName());
+
     private final UUID id;
     private final String name;
     private final String description;
@@ -41,8 +45,10 @@ public final class Step {
      * @param onStateChangedEventListener the onStateChangedEventListener to set
      */
     public void addOnStateChangedEventListener(Runnable onStateChangedEventListener) {
+        LOGGER.info("A new event listener must be aded to the step when its state will change.");
         if (Objects.nonNull(onStateChangedEventListener)) {
             this.onStateChangedEventListeners.add(onStateChangedEventListener);
+            LOGGER.info("A new event listener was added to the step when its state will be updated.");
         }
     }
     
@@ -76,6 +82,7 @@ public final class Step {
 
     private final boolean validateWithParent(byte[] output) throws IOException {
         if (this.approvationStep != null) {
+            LOGGER.info("The step need approval by the parent...");
             // Construction du prompt
             final String prompt = String.format(
                     "Le résultat suivant a été produit par '%s' (étape %d) :\n%s\n\n"
@@ -98,6 +105,7 @@ public final class Step {
     }
 
     private final void triggeOnStateChangedEventListerners() {
+        LOGGER.info("Trigging all event listeners because state was changed...");
         this.onStateChangedEventListeners.forEach(eventListener -> {
             eventListener.run();
         });
